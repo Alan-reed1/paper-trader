@@ -15,6 +15,7 @@ model User {
   createdAt DateTime  @default(now())
   holdings  Holding[]
   trades    Trade[]
+  monitoredTrade MonitoredTrade[]
 }
 
 model Holding {
