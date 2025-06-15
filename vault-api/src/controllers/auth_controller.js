@@ -1,28 +1,7 @@
 import prisma from '../db/prismaClient.js'; 
 import bcrypt from 'bcrypt';
-import { generateToken } from '../utils/jwt_gen.js';
 
-export async function loginUser(req, res) {
-  const { username, password } = req.body;
-
-  try {
-    const user = await prisma.user.findUnique({ where: { username } });
-    if (!user) return res.status(401).json({ error: 'Invalid credentials' });
-
-    const isValid = await bcrypt.compare(password, user.password);
-    if (!isValid) return res.status(401).json({ error: 'Invalid credentials' });
-
-    const token = generateToken(user);
-
-    return res.json({ token, user: { id: user.id, username: user.username } });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error: 'Server error' });
-  }
-}
-
-
-export async function registerUser(req, res) {
+async function registerUser(req, res) {
     const SALT_ROUNDS = 12;
 
     router.post('/register', async (req, res) => {
@@ -41,3 +20,28 @@ export async function registerUser(req, res) {
     }
     });
 }
+
+async function getProfile(req, res){
+    const user = req.body;
+    return user;
+}
+
+export default { registerUser, getProfile }
+
+
+// IMPORT prisma from db
+// IMPORT jwt generator util
+// IMPORT bcrypt (if hashing)
+
+// async function registerUser(req, res):
+//     EXTRACT username, password FROM req.body
+//     HASH password
+//     STORE user in DB via prisma
+//     GENERATE jwt
+//     RETURN { token, user info }
+
+// async function getProfile(req, res):
+//     ACCESS req.user FROM jwtTradeAuth middleware
+//     RETURN user profile
+
+// EXPORT { registerUser, getProfile }
