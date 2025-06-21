@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import authRoutes from './routes/auth.js';
+import sessionRoutes from './routes/session.js'
 import { prisma } from './db/prisma_client.js';
 
 console.log('Express app starting...'); // Should appear immediately
@@ -15,9 +16,8 @@ try {
   app.use(cors());
   app.use(express.json());
 
-
-
   // Routes
+
 
   app.get('/api/health', (req, res) => {
     res.json({ status: 'OK' });
@@ -25,10 +25,7 @@ try {
 
   app.use('/api/auth', authRoutes); 
 
-  // 404 Handler
-  // app.use('*', (req, res) => {
-  //   res.status(404).json({ error: 'Not Found' });
-  // });
+  app.use('/api/session', sessionRoutes)
 
   // Global error handler
   app.use((err, req, res, next) => {

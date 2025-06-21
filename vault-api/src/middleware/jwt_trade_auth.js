@@ -17,13 +17,3 @@ export function authenticateToken(req, res, next) {
     console.log(`Exception while verifying: ${err}`)
   }
 }
-
-// IMPORT jwt
-
-// async function jwtTradeAuth(req, res, next):
-//     EXTRACT token FROM Authorization header (Bearer TOKEN)
-//     VERIFY token
-//     IF invalid → RETURN 403
-//     ATTACH decoded user info to req.user
-//     CALL next()
-// EXPORT jwtTradeAuth
