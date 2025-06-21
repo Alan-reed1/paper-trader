@@ -8,47 +8,48 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  username  String    @unique
-  password  String
-  balance   Decimal   @default(0)
-  createdAt DateTime  @default(now())
-  holdings  Holding[]
-  trades    Trade[]
+  id             String           @id @default(uuid())
+  username       String           @unique
+  password       String
+  balance        Decimal          @default(0)
+  createdAt      DateTime         @default(now())
+  holdings       Holding[]
+  trades         Trade[]
   monitoredTrade MonitoredTrade[]
+  refreshToken   RefreshToken[]
 }
 
 model Holding {
-  id           String   @id @default(uuid())
-  stockSymbol  String
-  quantity     Decimal
-  avgPrice     Decimal
-  userId       String
-  user         User     @relation(fields: [userId], references: [id])
+  id          String  @id @default(uuid())
+  stockSymbol String
+  quantity    Decimal
+  avgPrice    Decimal
+  userId      String
+  user        User    @relation(fields: [userId], references: [id])
 }
 
 model Trade {
-  id           String   @id @default(uuid())
-  stockSymbol  String
-  quantity     Decimal
-  price        Decimal
-  executedAt   DateTime @default(now())
-  type         TradeType
-  userId       String
-  user         User     @relation(fields: [userId], references: [id])
+  id          String    @id @default(uuid())
+  stockSymbol String
+  quantity    Decimal
+  price       Decimal
+  executedAt  DateTime  @default(now())
+  type        TradeType
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
 }
 
 model MonitoredTrade {
-  id           String     @id @default(uuid())
-  stockSymbol  String
-  quantity     Decimal
-  targetPrice  Decimal?
-  deadline     DateTime?
-  executed     Boolean    @default(false)
-  type         TradeType
-  userId       String
-  user         User       @relation(fields: [userId], references: [id])
-  createdAt    DateTime   @default(now())
+  id          String    @id @default(uuid())
+  stockSymbol String
+  quantity    Decimal
+  targetPrice Decimal?
+  deadline    DateTime?
+  executed    Boolean   @default(false)
+  type        TradeType
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  createdAt   DateTime  @default(now())
 }
 
 enum TradeType {
@@ -56,3 +57,11 @@ enum TradeType {
   sell
 }
 
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+}

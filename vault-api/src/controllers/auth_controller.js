@@ -1,6 +1,11 @@
 import { prisma } from '../db/prisma_client.js';
 import bcrypt from 'bcrypt';
 import { generateToken } from '../utils/jwt_gen.js';
+import { nanoid } from 'nanoid';
+
+function generateRefreshToken() {
+    return nanoid(64);
+}
 
 // user registration function
 export async function registerUser(req, res) {
@@ -65,10 +70,22 @@ export async function loginUser(req, res) {
 
         // generate a JWT token on login 
         const token = generateToken(user);
+        const refreshToken = generateRefreshToken()
+        const expires = new Date()
+        expires.setDate(expires.getDate() + 7);
+
+        await prisma.refreshToken.create({
+            data: {
+                token: refreshToken,
+                userId: user.id,
+                expiresAt: expires,
+            },
+        });
 
         // on successful login, record response
         return res.status(200).json({
         token,
+        refreshToken,
         user: { id: user.id, username: user.username },
         });
     
