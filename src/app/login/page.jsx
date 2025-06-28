@@ -81,7 +81,8 @@ export default function LoginPage() {
         {/* Form */}
         <form onSubmit={handleSubmit} className="w-full space-y-5 mb-6">
           <input
-            type="username"
+            type="text"
+            name="username" 
             placeholder="username"
             className="w-full px-4 py-3 rounded-lg bg-background border border-muted text-white placeholder-muted focus:outline-none focus:border-primary"
             value={formData.username}
@@ -91,8 +92,9 @@ export default function LoginPage() {
           <input
             type="password"
             placeholder="Password"
+            name="password" 
             className="w-full px-4 py-3 rounded-lg bg-background border border-muted text-white placeholder-muted focus:outline-none focus:border-primary"
-            value={FormData.password}
+            value={formData.password}
             onChange={handelChange}
             required
           />
