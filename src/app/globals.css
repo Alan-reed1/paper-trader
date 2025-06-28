@@ -1,3 +1,39 @@
-* {
-  margin:auto;
+@import "tailwindcss";
+
+
+
+  @theme {
+  --color-background: #0d0f12;      /* Dark navy black (background) */
+  --color-primary: #72531c;         /* Metallic Gold (main logo text/icon) */
+  --color-secondary: #oklab(0.5 0.02 0.08);       /* Deeper gold / bronze shadow */
+  --color-dark: #1a1a1a;            /* Alternate dark (body text or card backgrounds) */
+  --color-accent: #3b9fae;          /* Optional cool contrast (teal/sapphire) */
+  --color-muted: #9b8c68;           /* Desaturated gold (borders/subtle text) */
+  --color-white: #ffffff;           /* For contrast as needed */
 }
+.bg-background { background-color: var(--color-background); }
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-dark { background-color: var(--color-dark); }
+.bg-accent { background-color: var(--color-accent); }
+.bg-muted { background-color: var(--color-muted); }
+.bg-white { background-color: var(--color-white); }
+
+/* === Text Colors === */
+.text-background { color: var(--color-background); }
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-dark { color: var(--color-dark); }
+.text-accent { color: var(--color-accent); }
+.text-muted { color: var(--color-muted); }
+.text-white { color: var(--color-white); }
+
+/* === Borders === */
+.border-background { border-color: var(--color-background); }
+.border-primary { border-color: var(--color-primary); }
+.border-secondary { border-color: var(--color-secondary); }
+.border-dark { border-color: var(--color-dark); }
+.border-accent { border-color: var(--color-accent); }
+.border-muted { border-color: var(--color-muted); }
+.border-white { border-color: var(--color-white); }
+
