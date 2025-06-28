@@ -34,7 +34,7 @@ export default function LoginPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     try{
-   const response = await axios.post('api/auth/login', formData);
+   const response = await axios.post('/api/auth/login', formData);
    setStatus('Logged in succfullyy');
 
    const {token, refreshToken, user} = response.data;
