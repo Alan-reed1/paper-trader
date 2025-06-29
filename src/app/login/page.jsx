@@ -34,7 +34,7 @@ export default function LoginPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     try{
-   const response = await axios.post('/api/auth/login', formData);
+   const response = await axios.post('http://localhost:5000/api/auth/login', formData);
    setStatus('Logged in succfullyy');
 
    const {token, refreshToken, user} = response.data;
@@ -44,7 +44,7 @@ export default function LoginPage() {
 
       router.push('/home');
   }catch(err){
- if(err.message?.staus === 401){
+ if(err.message?.status === 401){
   setStatus('inavlid username or password');
 }else{
   setStatus("Login failed, please try again");

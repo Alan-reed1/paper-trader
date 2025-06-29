@@ -10,6 +10,7 @@ function generateRefreshToken() {
 // user registration function
 export async function registerUser(req, res) {
     // grab username and password from the request
+    console.log("register route hit ");
     const { username, password } = req.body;
 
     // check if the user has inputted a username and a password
@@ -22,7 +23,7 @@ export async function registerUser(req, res) {
 
     // start the registration process
     try {
-        // make sure that the user has chosen a unique password
+        // make sure that the user has chosen a unique username
         const existing = await prisma.user.findUnique({ where: { username } });
         if (existing) return res.status(400).json({ error: 'Username already taken' });
 

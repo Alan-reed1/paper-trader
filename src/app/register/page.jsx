@@ -33,10 +33,10 @@ export default function RegisterPage(){
 
   //Hitting the authentication route
   async function handleSubmit(e) {
-    e.preventDefault();
 
+      e.preventDefault();
     try{
-   const response = await axios.post('/api/auth/register', formData);
+   const response = await axios.post('http://localhost:5000/api/auth/register', formData);
    setStatus('Logged in succfullyy');
 
    const {id, username, timeCreated} = response.data;
